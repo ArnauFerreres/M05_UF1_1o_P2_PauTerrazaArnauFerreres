@@ -136,7 +136,7 @@ void Logic()
         {
             win = true;
         }
-        enemy1.Update(&pacman_map);
+        enemy1.Update(&pacman_map, {(short)player_x, (short)player_y});
     }
 }
 

@@ -24,12 +24,14 @@ void Enemy::RandomDirection()
 
 Enemy::Enemy()
 {
+	spawn = { 0,0 };
 	position = { 0,0 };
 	direction = { 0,0 };
 }
 
 Enemy::Enemy(COORD _spawn)
 {
+	spawn = _spawn;
 	position = _spawn;
 	direction = { 0,0 };
 }
@@ -41,7 +43,7 @@ void Enemy::Draw()
 	std::cout << character;
 }
 
-void Enemy::Update(Map* _map)
+void Enemy::Update(Map* _map, COORD _player)
 {
 	RandomDirection();
 	COORD newPosition = position;
@@ -55,4 +57,9 @@ void Enemy::Update(Map* _map)
 		break;
 	}
 	position = newPosition;
+
+	
+	if (position.X == _player.X && position.Y == player.Y) {
+		position = spawn;
+	}
 }

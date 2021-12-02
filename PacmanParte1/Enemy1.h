@@ -8,6 +8,7 @@
 class Enemy
 {
 private:
+	COORD spawn;
 	COORD position;
 	COORD direction;
 	char character = 'X';
@@ -19,6 +20,7 @@ private:
 		Enemy();
 		Enemy(COORD _spawn);
 		void Draw();
-		void Update(Map* _map);
+		void Update(Map* _map, COORD _player);
+		
 };
 
