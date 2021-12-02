@@ -43,7 +43,7 @@ void Enemy::Draw()
 	std::cout << character;
 }
 
-void Enemy::Update(Map* _map, COORD _player)
+Enemy::ENEMY_STATE Enemy::Update(Map* _map, COORD _player)
 {
 	RandomDirection();
 	COORD newPosition = position;
@@ -58,8 +58,10 @@ void Enemy::Update(Map* _map, COORD _player)
 	}
 	position = newPosition;
 
-	
-	if (position.X == _player.X && position.Y == player.Y) {
+	ENEMY_STATE state = ENEMY_STATE::ENEMY_NONE;
+	if (position.X == _player.X && position.Y == _player.Y) {
 		position = spawn;
+		state = ENEMY_STATE::ENEMY_KILLED;
 	}
+	return state;
 }
