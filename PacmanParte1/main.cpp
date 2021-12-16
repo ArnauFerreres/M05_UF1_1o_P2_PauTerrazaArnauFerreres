@@ -28,9 +28,11 @@ char player_char = 'O';
 int player_x = 1;
 int player_y = 1;
 int player_points = 0;
+int deathPlayer = 0;
 USER_INPUTS input = USER_INPUTS::NONE;
 bool run = true;
 bool win = false;
+bool gameOver = false;
 
 int main()
 {
@@ -87,7 +89,7 @@ void Input()
 
 void Logic()
 {
-    if (win)
+    if (win || gameOver)
     {
         switch (input)
         {
@@ -162,6 +164,7 @@ void Logic()
                 player_points += 50;
                 break;
             case Enemy::ENEMY_DEAD:
+                deathPlayer += 1;
                 player_x = pacman_map.spawn_player.X;
                 player_y = pacman_map.spawn_player.Y;
                 break;
@@ -173,6 +176,10 @@ void Logic()
         if (pacman_map.points <= 0)
         {
             win = true;
+        }
+        if (deathPlayer >= 3)
+        {
+            gameOver = true;
         }
        
     }
@@ -199,8 +206,10 @@ void Draw()
         ConsoleUtils::Console_SetColor(ConsoleUtils::CONSOLE_COLOR::GREEN);
         std::cout << "Has ganado!" << std::endl;
     }
-    std::cout << "Fotogramas: " << TimeManager::getInstance().frameCount << std::endl;
-    std::cout << "Time: " << TimeManager::getInstance().time << std::endl;
-    std::cout << "DeltaTime: " << TimeManager::getInstance().deltaTime << std::endl;
+    if (gameOver)
+    {
+        ConsoleUtils::Console_SetColor(ConsoleUtils::CONSOLE_COLOR::RED);
+        std::cout << "Has perdido!" << std::endl;
+    }
     TimeManager::getInstance().NextFrame();
 }

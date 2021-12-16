@@ -1,4 +1,5 @@
 #include "Enemy1.h"
+//#include "main.cpp"
 
 void Enemy::RandomDirection()
 {
