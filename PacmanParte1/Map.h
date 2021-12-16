@@ -74,4 +74,3 @@ public:
 	/// <param name="_tile">The tile to replace</param>
 	void SetTile(int _x, int _y, MAP_TILES _tile);
 };
-
